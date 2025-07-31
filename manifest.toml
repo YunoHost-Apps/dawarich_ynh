@@ -83,7 +83,7 @@ packages = [
     "protobuf-compiler", "libprotobuf-dev", 
 
     # Posqgresql & db
-    "postgresql", "postgresql-contrib",
+    "postgresql", "postgresql-contrib", "postgresql-postgis"
     "redis-server", "redis-tools",
 ]
 
