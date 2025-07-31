@@ -39,6 +39,7 @@ ynh_config_add --template=".env" --destination="$install_dir/.env"
 ynh_script_progression "Starting $app's systemd service..."
 
 ynh_systemctl --service="$app" --action="start"
+ynh_systemd_action --service_name=${app}-sidekiq --action="start" --log_path=/var/log/$app/$app-sidekiq.log --line_match="Schedules Loaded"
 
 #=================================================
 # END OF SCRIPT

@@ -44,8 +44,6 @@ ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
 
-yunohost service add "$app" --description="A short description of the app" --log="/var/log/$app/$app.log"
-
 ynh_restore "/etc/logrotate.d/$app"
 
 #ynh_restore "/etc/fail2ban/jail.d/$app.conf"
@@ -63,8 +61,8 @@ ynh_restore "/var/log/$app/"
 #=================================================
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
-### Typically you only have either $app or PHP-FPM but not both at the same time...
 ynh_systemctl --service="$app" --action="start"
+ynh_systemd_action --service_name=${app}-sidekiq --action="start" --log_path=/var/log/$app/$app-sidekiq.log --line_match="Schedules Loaded"
 
 ynh_systemctl --service=nginx --action=reload
 
