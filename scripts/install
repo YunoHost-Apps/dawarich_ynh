@@ -25,23 +25,6 @@ ynh_script_progression "Installing Ruby..."
 ynh_ruby_install
 
 #=================================================
-# BUILD APP
-#=================================================
-ynh_script_progression "Building $app..."
-
-pushd "$install_dir"
-    gem update --system
-	gem install bundler --no-document
-	ynh_exec_as_app $ld_preload bin/bundle bin
-    ynh_exec_as_app $ld_preload bin/bundle config set --local path 'vendor/bundle'
-    ynh_exec_as_app $ld_preload bin/bundle config set --local without 'development test'
-    ynh_exec_as_app $ld_preload bin/bundle install --jobs 4 --retry 3
-    
-    ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
-popd 
-
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."
@@ -69,6 +52,22 @@ ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 chmod 400 "$install_dir/.env"
 chown "$app:$app" "$install_dir/.env"
+
+#=================================================
+# BUILD APP
+#=================================================
+ynh_script_progression "Building $app..."
+
+pushd "$install_dir"
+    gem update --system
+	gem install bundler --no-document
+	ynh_exec_as_app $ld_preload bin/bundle bin
+    ynh_exec_as_app $ld_preload bin/bundle config set --local path 'vendor/bundle'
+    ynh_exec_as_app $ld_preload bin/bundle config set --local without 'development test'
+    ynh_exec_as_app $ld_preload bin/bundle install --jobs 4 --retry 3
+    
+    ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
+popd 
 
 #=================================================
 # SYSTEM CONFIGURATION
