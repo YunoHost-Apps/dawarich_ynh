@@ -4,6 +4,7 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
+memory_needed="2560"
 ruby_version="3.3.5"
 
 case $YNH_ARCH in
