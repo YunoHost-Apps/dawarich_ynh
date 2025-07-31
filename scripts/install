@@ -20,9 +20,8 @@ ynh_app_setting_set --key=redis_db --value=$redis_db
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing Ruby..."
-ynh_hide_warnings ynh_install_ruby --ruby_version="$ruby_version"
-ynh_use_ruby
+ynh_script_progression "Installing Ruby..."
+ynh_hide_warnings ynh_ruby_install --ruby_version="$ruby_version"
 
 #=================================================
 # BUILD APP
@@ -30,10 +29,10 @@ ynh_use_ruby
 ynh_script_progression "Building $app..."
 
 pushd "$install_dir"
-    ynh_exec_as $app $ynh_ruby_load_path $ld_preload bin
-    ynh_exec_as $app $ynh_ruby_load_path $ld_preload bundle config set --local path 'vendor/bundle'
-    ynh_exec_as $app $ynh_ruby_load_path $ld_preload bundle config set --local without 'development test'
-    ynh_exec_as $app $ynh_ruby_load_path $ld_preload bundle install --jobs 4 --retry 3
+    ynh_exec_as $app $path_with_ruby $ld_preload bin
+    ynh_exec_as $app $path_with_ruby $ld_preload bundle config set --local path 'vendor/bundle'
+    ynh_exec_as $app $path_with_ruby $ld_preload bundle config set --local without 'development test'
+    ynh_exec_as $app $path_with_ruby $ld_preload bundle install --jobs 4 --retry 3
     
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd 
