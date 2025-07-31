@@ -4,8 +4,7 @@ packaging_format = 2
 
 id = "example"
 name = "Example app"
-description.en = "Explain in *a few (10~15) words* the purpose of the app or what it actually does (it is meant to give a rough idea to users browsing a catalog of 100+ apps)"
-description.fr = "Expliquez en *quelques* (10~15) mots l'utilité de l'app ou ce qu'elle fait (l'objectif est de donner une idée grossière pour des utilisateurs qui naviguent dans un catalogue de 100+ apps)"
+description.en = "Self-hostable alternative to Google Timeline "
 
 version = "0.30.6~ynh1"
 
@@ -69,7 +68,24 @@ ram.runtime = "50M"
     main.default = 3000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, postgresql-postgis, build-essential, pkg-config, libpq-dev, libffi-dev, libyaml-dev, zlib1g-dev, redis-server"
+packages = [
+    # Ruby
+    "build-essential", "gcc", "g++", "autoconf", "bison", "make",
+    "libssl-dev", "libyaml-dev", "libreadline6-dev", "zlib1g-dev",
+    "libncurses5-dev", "libffi-dev", "libgdbm-dev", "libgdbm6",
+    "libjemalloc-dev", "pkg-config",
+
+    # gems Ruby natifs
+    "libxml2-dev", "libxslt1-dev",    
+    "libpq-dev",                      
+    "libicu-dev",                    
+    "libidn11-dev",                  
+    "protobuf-compiler", "libprotobuf-dev", 
+
+    # Posqgresql & db
+    "postgresql", "postgresql-contrib",
+    "redis-server", "redis-tools",
+]
 
     [resources.database]
     type = "postgresql"
