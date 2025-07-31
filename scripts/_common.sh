@@ -4,4 +4,4 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-ruby_version="3.3.6"
+ruby_version="3.3.5"
