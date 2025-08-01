@@ -5,7 +5,7 @@
 #=================================================
 
 memory_needed="2560"
-ruby_version="3.3.5"
+ruby_version="3.4.1"
 
 case $YNH_ARCH in
 	amd64)
