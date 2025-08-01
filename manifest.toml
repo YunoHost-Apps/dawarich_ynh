@@ -76,7 +76,7 @@ packages = [
     "libncurses5-dev", "libffi-dev", "libgdbm-dev", "libgdbm6",
     "libjemalloc-dev", "pkg-config",
 
-    # gems Ruby natifs
+    # gems Ruby
     "libxml2-dev", "libxslt1-dev",    
     "libpq-dev",                      
     "libicu-dev",                    
