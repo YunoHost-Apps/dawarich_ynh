@@ -10,7 +10,7 @@ Environment="RAILS_ENV=production"
 Environment="PORT=__PORT_WEB__"
 Environment="__LD_PRELOAD__"
 Environment="__PATH_WITH_RUBY__"
-ExecStart=bundle exec puma -C config/puma.rb
+ExecStart=__INSTALL_DIR__/vendor/bundle/ruby/__RUBY_VERSION__/bin/bundle exec puma -C config/puma.rb
 ExecReload=/bin/kill -SIGUSR1 $MAINPID
 TimeoutSec=15
 Restart=always
