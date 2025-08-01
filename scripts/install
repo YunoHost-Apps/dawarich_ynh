@@ -61,7 +61,7 @@ ynh_script_progression "Building $app..."
 
 pushd "$install_dir"
     gem update --system
-    ynh_gem install bundler
+    gem install bundler
 	gem install bundler --no-document
     ynh_exec_as_app $ld_preload bundle config set --local path 'vendor/bundle'
     ynh_exec_as_app $ld_preload bundle config set --local without 'development test'
