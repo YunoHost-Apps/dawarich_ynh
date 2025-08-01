@@ -4,8 +4,6 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-ruby_version="3.4.1"
-
 case $YNH_ARCH in
 	amd64)
 		ld_preload="LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so"
