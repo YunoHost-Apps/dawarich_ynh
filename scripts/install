@@ -61,10 +61,11 @@ ynh_script_progression "Building $app..."
 
 pushd "$install_dir"
     gem update --system
+    ynh_gem install bundler
 	gem install bundler --no-document
-    #ynh_exec_as_app $ld_preload bin/bundle config set --local path 'vendor/bundle'
-    ynh_exec_as_app $ld_preload bin/bundle config set --local without 'development test'
-    ynh_exec_as_app $ld_preload bin/bundle install --jobs 4 --retry 3
+    ynh_exec_as_app $ld_preload bundle config set --local path 'vendor/bundle'
+    ynh_exec_as_app $ld_preload bundle config set --local without 'development test'
+    ynh_exec_as_app $ld_preload bundle install --jobs 4 --retry 3
     
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd 
