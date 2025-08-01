@@ -2,8 +2,8 @@
 
 packaging_format = 2
 
-id = "example"
-name = "Example app"
+id = "dawarich"
+name = "Dawarich"
 description.en = "Self-hostable alternative to Google Timeline "
 
 version = "0.30.6~ynh1"
