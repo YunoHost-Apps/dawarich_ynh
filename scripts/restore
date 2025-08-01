@@ -46,10 +46,11 @@ systemctl enable "$app.service" --quiet
 ynh_restore "/etc/systemd/system/$app-sidekiq.service"
 systemctl enable "$app-sidekiq.service" --quiet
 
-ynh_config_add_systemd
+ynh_config_add_systemd --service="${app}" --template="dawarich.service"
+ynh_config_add_systemd --service="${app}-sidekiq" --template="dawarich-sidekiq.service"
+
 yunohost service add "$app" --description="$app’s service" --log="/var/log/$app/$app.log"
-ynh_config_add_systemd --service="$app-sidekiq" --template="dawarich-sidekiq.service"
-yunohost service add "$app-sidekiq" --description="$app sidekiq service"
+yunohost service add "$app-sidekiq" --description="$app sidekiq service" --log="/var/log/$app/$app-sidekiq.log"
 
 ynh_restore "/etc/logrotate.d/$app"
 
