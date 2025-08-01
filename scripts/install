@@ -70,6 +70,8 @@ pushd "$install_dir"
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd 
 
+bundle_path=$(find $install_dir/vendor/bundle -type f -path '*/bin/bundle' -executable | head -n1)
+
 #=================================================
 # SYSTEM CONFIGURATION
 #=================================================
