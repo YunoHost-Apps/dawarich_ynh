@@ -6,6 +6,7 @@
 
 memory_needed="2560"
 ruby_version="3.4.1"
+bundle_path=$(find $install_dir/vendor/bundle -type f -path '*/bin/bundle' -executable | head -n1)
 
 case $YNH_ARCH in
 	amd64)
