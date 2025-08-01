@@ -70,6 +70,11 @@ pushd "$install_dir"
     ynh_exec_as_app $ld_preload bundle config set --local without 'development test'
     ynh_exec_as_app $ld_preload bundle install --jobs 4 --retry 3
 
+
+    ynh_exec_as_app $ld_preload bundle exec rails db:migrate
+    ynh_exec_as_app $ld_preload bundle exec rake data:migrate
+    ynh_exec_as_app $ld_preload bundle exec rails db:seed
+
     ynh_exec_as_app $ld_preload bundle exec $install_dir/bin/rails credentials:edit 
     
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
