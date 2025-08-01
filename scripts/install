@@ -87,7 +87,7 @@ chown $app:$app /var/log/$app
 
 ynh_config_add_nginx
 
-ynh_config_add_systemd --service="${app}" --template="systemd.service"
+ynh_config_add_systemd --service="${app}" --template="dawarich.service"
 ynh_config_add_systemd --service="${app}-sidekiq" --template="dawarich-sidekiq.service"
 
 yunohost service add "$app" --description="$app’s service" --log="/var/log/$app/$app.log"
@@ -101,7 +101,7 @@ yunohost service add "$app-sidekiq" --description="$app sidekiq service" --log="
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start"
+ynh_systemctl --service="$app" --action="start" --log_path=/var/log/$app/$app.log
 ynh_systemctl --service=${app}-sidekiq --action="start" --log_path=/var/log/$app/$app-sidekiq.log --wait_until="Schedules Loaded"
 
 #=================================================
