@@ -6,6 +6,7 @@ After=network.target
 Type=simple
 User=__APP__
 WorkingDirectory=__INSTALL_DIR__/
+EnvironmentFile=__INSTALL_DIR__/.env
 Environment="RAILS_ENV=production"
 Environment="DB_POOL=25"
 Environment="MALLOC_ARENA_MAX=2"
