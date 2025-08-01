@@ -35,7 +35,7 @@ chown -R "$app:www-data" "$install_dir"
 #=================================================
 ynh_script_progression "Installing Ruby..."
 
-ruby_version=$(cat $install_dir/.ruby_version)
+ruby_version=$(cat $install_dir/.ruby-version)
 ynh_ruby_install
 
 #=================================================
