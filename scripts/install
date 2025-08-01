@@ -85,7 +85,7 @@ yunohost service add "$app-sidekiq" --description="$app sidekiq service"
 
 ynh_config_add_logrotate
 
-s# Use logrotate to manage application logfiles
+# Use logrotate to manage application logfiles
 mkdir -p /var/log/$app
 chown $app:$app /var/log/$app
 
