@@ -1,5 +1,5 @@
 [Unit]
-Description=Small description of the service
+Description=Dawarich main service
 After=network.target
 
 [Service]
