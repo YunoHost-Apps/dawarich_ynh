@@ -74,12 +74,11 @@ pushd "$install_dir"
     source "$install_dir/.env"
     set +o allexport
     
-    export REDIS_URL=redis://127.0.0.1:6379
-    ynh_exec_as_app env REDIS_URL=redis://127.0.0.1:6379 $ld_preload bundle exec rails db:migrate
-    ynh_exec_as_app $ld_preload bundle exec rake data:migrate
-    ynh_exec_as_app $ld_preload bundle exec rails db:seed
+    ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails db:migrate
+    ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rake data:migrate
+    ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails db:seed
 
-    ynh_exec_as_app $ld_preload bundle exec $install_dir/bin/rails credentials:edit 
+    ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec $install_dir/bin/rails credentials:edit 
     
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd 
