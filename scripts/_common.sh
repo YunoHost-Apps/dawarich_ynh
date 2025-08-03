@@ -4,7 +4,7 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-nodejs_version=22
+nodejs_version=18
 
 case $YNH_ARCH in
 	amd64)
