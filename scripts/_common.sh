@@ -4,6 +4,8 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
+nodejs_version=22
+
 case $YNH_ARCH in
 	amd64)
 		ld_preload="LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so"
