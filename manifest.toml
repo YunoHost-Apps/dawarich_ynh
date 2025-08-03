@@ -46,7 +46,7 @@ ram.runtime = "50M"
 
     [resources.sources.main]
     url = "https://github.com/Freika/dawarich/archive/refs/tags/0.26.0.tar.gz"
-    sha256 = "7d33153b588a7454483015d46c31cf9cbc87e93263daa527e957c6fc9f12eb2d"
+    sha256 = "e294cae7fc828eb8aaeb25218160143f08fd8e793276d5121150c35762d66ef5"
     
     autoupdate.strategy = "latest_github_release"
 
