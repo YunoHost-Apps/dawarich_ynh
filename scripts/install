@@ -33,10 +33,10 @@ chown -R "$app:www-data" "$install_dir"
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression "Installing Ruby..."
+ynh_script_progression "Installing Ruby and NodeJS..."
 
-ruby_version=$(cat $install_dir/.ruby-version)
 ynh_ruby_install
+ynh_nodejs_install
 
 #=================================================
 # PREPARE A POSTGRESQL DATABASE
@@ -64,6 +64,7 @@ chown "$app:$app" "$install_dir/.env"
 ynh_script_progression "Building $app..."
 
 pushd "$install_dir"
+    ynh_hide_warnings ynh_exec_as_app yarn install --immutable
     gem update --system
 	gem install bundler --no-document
     ynh_exec_as_app $ld_preload bundle config set --local path 'vendor/bundle'
