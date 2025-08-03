@@ -12,6 +12,9 @@ source /usr/share/yunohost/helpers
 # INITIALIZE AND STORE SETTINGS
 #=================================================
 
+admin=$(ynh_user_get_info --username=$admin --key=username)
+admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
+
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --key=key --value=$key
 
@@ -87,6 +90,13 @@ pushd "$install_dir"
 
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd 
+
+ynh_script_progression "Creating user..."
+
+pushd "$install_dir"
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.create!(email: '$admin_mail', password: '$password', admin: true)"
+    #ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.find_by(email: 'user@example.com').update(admin: true)"
+popd
 
 #=================================================
 # SYSTEM CONFIGURATION
