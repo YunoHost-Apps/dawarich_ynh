@@ -6,7 +6,7 @@ id = "dawarich"
 name = "Dawarich"
 description.en = "Self-hostable alternative to Google Timeline "
 
-version = "0.30.6~ynh1"
+version = "0.26.0~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -45,7 +45,7 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    url = "https://github.com/Freika/dawarich/archive/refs/tags/0.30.6.tar.gz"
+    url = "https://github.com/Freika/dawarich/archive/refs/tags/0.26.0.tar.gz"
     sha256 = "7d33153b588a7454483015d46c31cf9cbc87e93263daa527e957c6fc9f12eb2d"
     
     autoupdate.strategy = "latest_github_release"
