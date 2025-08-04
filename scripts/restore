@@ -69,7 +69,7 @@ ynh_restore "/var/log/$app/"
 #=================================================
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
-ynh_systemctl --service="$app" --action="start" --log_path=/var/log/$app/$app.log
+ynh_systemctl --service="$app" --action="start" --log_path=/var/log/$app/$app.log --wait_until="Listening on"
 ynh_systemctl --service=${app}-sidekiq --action="start" --log_path=/var/log/$app/$app-sidekiq.log --wait_until="Firing startup event"
 
 ynh_systemctl --service=nginx --action=reload

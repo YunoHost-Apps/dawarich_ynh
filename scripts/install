@@ -5,7 +5,6 @@
 #=================================================
 
 source _common.sh
-#source ynh_add_swap
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -128,7 +127,7 @@ yunohost service add "$app-sidekiq" --description="$app sidekiq service" --log="
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start" --log_path=/var/log/$app/$app.log
+ynh_systemctl --service="$app" --action="start" --log_path=/var/log/$app/$app.log --wait_until="Listening on"
 ynh_systemctl --service=${app}-sidekiq --action="start" --log_path=/var/log/$app/$app-sidekiq.log --wait_until="Firing startup event"
 
 #=================================================
