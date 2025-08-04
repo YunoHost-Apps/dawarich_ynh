@@ -93,9 +93,11 @@ popd
 
 ynh_script_progression "Creating user..."
 
+#Create new admin user and delete default one
 pushd "$install_dir"
     ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.create!(email: '$admin_mail', password: '$password', admin: true)"
-    #ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.find_by(email: 'user@example.com').update(admin: true)"
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.find_by(email: 'demo@dawarich.app').destroy"
+
 popd
 
 #=================================================
