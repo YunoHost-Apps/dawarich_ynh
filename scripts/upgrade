@@ -20,9 +20,19 @@ ynh_systemctl --service="$app-sidekiq" --action="stop"
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir"
+ynh_setup_source --dest_dir="$install_dir" 
 
 chown -R "$app:www-data" "$install_dir"
+
+#=================================================
+# UPGRADE DEPENDENCIES
+#=================================================
+ynh_script_progression "Upgrading Ruby and NodeJS..."
+
+ruby_version=$(cat $install_dir/.ruby-version)
+ynh_ruby_install
+
+ynh_nodejs_install
 
 #=================================================
 # UPDATE A CONFIG FILE

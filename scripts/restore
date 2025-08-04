@@ -28,6 +28,16 @@ ynh_restore "$data_dir"
 chown -R "$app:$app" "$data_dir"
 
 #=================================================
+# REINSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression "Reinstalling Ruby and NodeJS..."
+
+ruby_version=$(cat $install_dir/.ruby-version)
+ynh_ruby_install
+
+ynh_nodejs_install
+
+#=================================================
 # RESTORE THE POSTGRESQL DATABASE
 #=================================================
 ynh_script_progression "Restoring the PostgreSQL database..."
