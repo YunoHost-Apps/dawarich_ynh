@@ -1,13 +1,19 @@
 [Unit]
-Description=Small description of the service
+Description=Dawarich main service
 After=network.target
 
 [Service]
 Type=simple
 User=__APP__
-Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/script
+EnvironmentFile=__INSTALL_DIR__/.env
+Environment="RAILS_ENV=production"
+Environment="__LD_PRELOAD__"
+Environment="PATH=__PATH_WITH_RUBY__"
+ExecStart=/opt/rbenv/versions/__APP__/bin/bundle exec puma -C config/puma.rb
+ExecReload=/bin/kill -SIGUSR1 $MAINPID
+TimeoutSec=15
+Restart=always
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 
