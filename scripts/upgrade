@@ -70,7 +70,18 @@ pushd "$install_dir"
     ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rake assets:precompile
 
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
-popd 
+popd
+
+#Remove unneeded files
+ynh_safe_rm "$install_dir"/.cache
+ynh_safe_rm "$install_dir"/node_modules
+ynh_safe_rm "$install_dir"/.github
+ynh_safe_rm "$install_dir"/.devcontainer
+ynh_safe_rm "$install_dir"/.circleci
+ynh_safe_rm "$install_dir"/docs
+ynh_safe_rm "$install_dir"/test
+ynh_safe_rm "$install_dir"/spec
+ynh_safe_rm "$install_dir"/screenshots
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATION

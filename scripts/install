@@ -96,8 +96,18 @@ ynh_script_progression "Creating user..."
 pushd "$install_dir"
     ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.create!(email: '$admin_mail', password: '$password', admin: true)"
     ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails runner "User.find_by(email: 'demo@dawarich.app').destroy"
-
 popd
+
+#Remove unneeded files
+ynh_safe_rm "$install_dir"/.cache
+ynh_safe_rm "$install_dir"/node_modules
+ynh_safe_rm "$install_dir"/.github
+ynh_safe_rm "$install_dir"/.devcontainer
+ynh_safe_rm "$install_dir"/.circleci
+ynh_safe_rm "$install_dir"/docs
+ynh_safe_rm "$install_dir"/test
+ynh_safe_rm "$install_dir"/spec
+ynh_safe_rm "$install_dir"/screenshots
 
 #=================================================
 # SYSTEM CONFIGURATION
