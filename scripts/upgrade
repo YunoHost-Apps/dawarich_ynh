@@ -74,7 +74,6 @@ popd
 
 #Remove unneeded files
 ynh_safe_rm "$install_dir"/.cache
-ynh_safe_rm "$install_dir"/tmp
 ynh_safe_rm "$install_dir"/node_modules
 ynh_safe_rm "$install_dir"/.github
 ynh_safe_rm "$install_dir"/.devcontainer
