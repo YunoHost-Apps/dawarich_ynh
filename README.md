@@ -18,6 +18,10 @@ Self-hostable alternative to Google Timeline
 <a href="https://github.com/YunoHost-Apps/dawarich_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
+
+## Screenshots
+![Screenshot of Dawarich](./doc/screenshots/dawarich.jpeg)
+
 ## 📦 Developer info
 
 [![Automatic tests level](https://apps.yunohost.org/badge/cilevel/dawarich)](https://ci-apps.yunohost.org/ci/apps/dawarich/)
