@@ -10,7 +10,7 @@ EnvironmentFile=__INSTALL_DIR__/.env
 Environment="RAILS_ENV=production"
 Environment="DB_POOL=25"
 Environment="MALLOC_ARENA_MAX=2"
-Environment="__LD_PRELOAD__"
+Environment="LD_PRELOAD=libjemalloc.so"
 Environment="PATH=__PATH_WITH_RUBY__"
 ExecStart=/opt/rbenv/versions/__APP__/bin/bundle exec sidekiq -c 25
 TimeoutSec=15

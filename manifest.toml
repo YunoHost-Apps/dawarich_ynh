@@ -20,7 +20,7 @@ code = "https://github.com/Freika/dawarich"
 fund = "https://www.patreon.com/freika"
 
 [integration]
-yunohost = ">= 12.0.9"
+yunohost = ">= 12.1.15"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -95,3 +95,9 @@ packages = [
 
     [resources.database]
     type = "postgresql"
+
+    [resources.nodejs]
+    version = "18.17.1"
+
+    [resources.ruby]
+    version = "3.4.1"

@@ -25,16 +25,6 @@ ynh_setup_source --dest_dir="$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
 #=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-ynh_script_progression "Upgrading Ruby and NodeJS..."
-
-ruby_version=$(cat $install_dir/.ruby-version)
-ynh_ruby_install
-
-ynh_nodejs_install
-
-#=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating $app's configuration files..."
@@ -54,20 +44,20 @@ pushd "$install_dir"
     ynh_hide_warnings ynh_exec_as_app yarn install --immutable
     gem update --system
 	gem install bundler --no-document
-    ynh_exec_as_app $ld_preload bundle config set --local path 'vendor/bundle'
-    ynh_exec_as_app $ld_preload bundle config set --local without 'development test'
-    ynh_exec_as_app $ld_preload bundle install --jobs 4 --retry 3
+    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle config set --local path 'vendor/bundle'
+    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle config set --local without 'development test'
+    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle install --jobs 4 --retry 3
 
     set -o allexport
     source "$install_dir/.env"
     set +o allexport
 
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec $install_dir/bin/rails credentials:edit 
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec $install_dir/bin/rails credentials:edit 
 
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails db:migrate
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rake data:migrate
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rails db:seed
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) $ld_preload bundle exec rake assets:precompile
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rails db:migrate
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rake data:migrate
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rails db:seed
+    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rake assets:precompile
 
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd
