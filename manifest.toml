@@ -87,6 +87,7 @@ ram.runtime = "50M"
     "libicu-dev",                    
     "libidn11-dev",                  
     "protobuf-compiler", "libprotobuf-dev", 
+    "cmake"
 
     # Posqgresql & db
     "postgresql", "postgresql-contrib", "postgresql-postgis",
