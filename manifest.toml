@@ -6,7 +6,7 @@ id = "dawarich"
 name = "Dawarich"
 description.en = "Self-hostable alternative to Google Timeline "
 
-version = "0.26.0~ynh1"
+version = "0.37.2~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -20,7 +20,7 @@ code = "https://github.com/Freika/dawarich"
 fund = "https://www.patreon.com/freika"
 
 [integration]
-yunohost = ">= 12.1.15"
+yunohost = ">= 13.0"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -55,8 +55,8 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    url = "https://github.com/Freika/dawarich/archive/refs/tags/0.26.0.tar.gz"
-    sha256 = "e294cae7fc828eb8aaeb25218160143f08fd8e793276d5121150c35762d66ef5"
+    url = "https://github.com/Freika/dawarich/archive/refs/tags/0.37.2.tar.gz"
+    sha256 = "34c88dc16625339d9f5e6f3bdb6c1553cabe82ddce3207726d82ade52cc34363"
     
     autoupdate.strategy = "latest_github_release"
 
@@ -74,7 +74,7 @@ ram.runtime = "50M"
     main.default = 3000
     
     [resources.apt]
-packages = [
+    packages = [
     # Ruby
     "build-essential", "gcc", "g++", "autoconf", "bison", "make",
     "libssl-dev", "libyaml-dev", "libreadline6-dev", "zlib1g-dev",
@@ -100,4 +100,4 @@ packages = [
     version = "18.17.1"
 
     [resources.ruby]
-    version = "3.4.1"
+    version = "3.4.6"
