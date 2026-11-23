@@ -56,6 +56,9 @@ chown "$app:$app" "$install_dir/.env"
 #=================================================
 ynh_script_progression "Building $app..."
 
+# Since nodejs 25, corepack is removed from nodejs and should be installed separately.
+ynh_hide_warnings npm install -g corepack@latest
+
 pushd "$install_dir"
     env corepack enable
     ynh_hide_warnings ynh_exec_as_app yarn install --immutable
