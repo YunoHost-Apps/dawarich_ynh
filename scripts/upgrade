@@ -53,9 +53,9 @@ ynh_script_progression "Building $app..."
 pushd "$install_dir"
     gem update --system --no-document
 	gem install bundler --no-document
-    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle config set --local path 'vendor/bundle'
-    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle config set --local without 'development test'
-    ynh_exec_as_app LD_PRELOAD=libjemalloc.so bundle install --jobs 4 --retry 3
+    ynh_exec_as_app RAILS_ENV=production bundle config set --local path 'vendor/bundle'
+    ynh_exec_as_app RAILS_ENV=production bundle config set --local without 'development test'
+    ynh_exec_as_app RAILS_ENV=production bundle install --jobs 4 --retry 3
 
     ynh_exec_as_app npm ci --no-audit --no-fund 
     ynh_safe_rm .npm
@@ -65,12 +65,12 @@ pushd "$install_dir"
     source "$install_dir/.env"
     set +o allexport
 
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec $install_dir/bin/rails credentials:edit 
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec $install_dir/bin/rails credentials:edit 
 
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rails db:migrate
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rake data:migrate
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rails db:seed
-    ynh_hide_warnings ynh_exec_as_app env $(cat $install_dir/.env | xargs) LD_PRELOAD=libjemalloc.so bundle exec rake assets:precompile
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:migrate
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake data:migrate
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:seed
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake assets:precompile
 
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
 popd
