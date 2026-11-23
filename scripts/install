@@ -74,7 +74,7 @@ pushd "$install_dir"
 
     ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec $install_dir/bin/rails credentials:edit 
 
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:migrate
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=__DB_PWD__ DATABASE_NAME=$db_name bundle exec rails db:migrate
     ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake data:migrate
     ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:seed
     ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake assets:precompile
