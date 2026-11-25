@@ -60,20 +60,19 @@ pushd "$install_dir"
     ynh_exec_as_app npm ci --no-audit --no-fund 
     ynh_safe_rm .npm
 
-
     set -o allexport
     source "$install_dir/.env"
     set +o allexport
 
     ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec $install_dir/bin/rails credentials:edit 
 
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:migrate
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake data:migrate
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails db:seed
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rake assets:precompile
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rails db:migrate
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rake data:migrate
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rails db:seed
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rake assets:precompile
 
     ynh_safe_rm vendor/bundle/ruby/$ruby_version/cache/*.gem
-popd
+popd 
 
 #Remove unneeded files
 ynh_safe_rm "$install_dir"/.cache
