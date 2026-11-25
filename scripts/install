@@ -86,8 +86,8 @@ ynh_script_progression "Creating user..."
 
 #Create new admin user and delete default one
 pushd "$install_dir"
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails runner "User.create!(email: '$admin_mail', password: '$password', admin: true)"
-    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production bundle exec rails runner "User.find_by(email: 'demo@dawarich.app').destroy"
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rails runner "User.create!(email: '$admin_mail', password: '$password', admin: true)"
+    ynh_hide_warnings ynh_exec_as_app env SECRET_KEY_BASE=$secret_key_base RAILS_ENV=production DATABASE_HOST=localhost DATABASE_USERNAME=$db_user DATABASE_PASSWORD=$db_pwd DATABASE_NAME=$db_name bundle exec rails runner "User.find_by(email: 'demo@dawarich.app').destroy"
 popd
 
 #Remove unneeded files
