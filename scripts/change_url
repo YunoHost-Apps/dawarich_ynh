@@ -6,6 +6,8 @@
 
 source /usr/share/yunohost/helpers
 
+timezone=$(timedatectl show --value --property=Timezone)
+
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
